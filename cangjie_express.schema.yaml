@@ -1,0 +1,81 @@
+# Rime schema settings
+# encoding: utf-8
+
+schema:
+  schema_id: cangjie5_express
+  name: 倉頡五代·快打模式
+  version: "2018.04.14"
+  author:
+    - 發明人 朱邦復先生
+  description: |
+    第五代倉頡輸入法
+    碼表源自倉頡之友發佈的《五倉世紀版》
+    www.chinesecj.com
+    快打模式：
+      - 取消連打
+      - 無重碼自動上屏，有重碼頂字上屏
+      - 取消 , . 翻頁
+      - 取消拼音混打
+    修改：
+      - 刪除西文
+      - 刪除繁簡轉換
+      - 刪除全角ascii符號
+  dependencies:
+    - luna_quanpin
+
+switches:
+  - name: full_shape
+    states: [ 半角, 全角 ]
+  - name: extended_charset
+    states: [ 常用, 增廣 ]
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - table_translator
+  filters:
+    - uniquifier
+    - single_char_filter
+
+speller:
+  alphabet: zyxwvutsrqponmlkjihgfedcba
+  delimiter: " "
+  auto_select: true
+  #max_code_length: 5  # 僅五碼自動上屏
+
+translator:
+  dictionary: cangjie
+  prism: cangjie5_express
+  enable_charset_filter: true
+  enable_sentence: false
+  preedit_format:
+    - "xlit|abcdefghijklmnopqrstuvwxyz|日月金木水火土竹戈十大中一弓人心手口尸廿山女田難卜符|"
+  comment_format:
+    - "xlit|abcdefghijklmnopqrstuvwxyz~|日月金木水火土竹戈十大中一弓人心手口尸廿山女田難卜符～|"
+  disable_user_dict_for_patterns:
+    - "^z.*$"
+    - "^yyy.*$"
+
+punctuator:
+  import_preset: default
+
+key_binder:
+  import_preset: default
+  bindings:
+    - { when: paging, accept: comma, send: comma }
+    - { when: has_menu, accept: period, send: period }
