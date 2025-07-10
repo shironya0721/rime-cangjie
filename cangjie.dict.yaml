@@ -2,8 +2,8 @@
 ---
 name: "cangjie"
 version: "0.2.0"
-sort: original
-use_preset_vocabulary: false
+sort: by_weight
+use_preset_vocabulary: true
 import_tables:
   - cangjie.5-base
   - cangjie.5-base-dups

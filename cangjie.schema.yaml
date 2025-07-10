@@ -15,6 +15,9 @@ schema:
       - 取消各種不合理的自動行為
 
 switches:
+  - name: ascii_mode
+    reset: 0
+    states: [ 中文 ]
   - name: full_shape
     states: [ 半角, 全角 ]
   - name: extended_charset
@@ -44,8 +47,9 @@ engine:
 
 speller:
   alphabet: zyxwvutsrqponmlkjihgfedcba
-  delimiter: " "
+  delimiter: " '"
   auto_select: false
+  auto_clear: manual
 
 ascii_composer:
   import_preset: default
@@ -57,9 +61,11 @@ ascii_composer:
 translator:
   dictionary: cangjie
   prism: cangjie
-  enable_charset_filter: false
-  enable_encoder: false
-  enable_sentence: false
+  enable_charset_filter: true
+  enable_encoder: true
+  encode_commit_history: true
+  enable_sentence: true
+  enable_completion: true
   preedit_format:
     - "xlit|abcdefghijklmnopqrstuvwxyz|日月金木水火土竹戈十大中一弓人心手口尸廿山女田難卜符|"
   comment_format:
