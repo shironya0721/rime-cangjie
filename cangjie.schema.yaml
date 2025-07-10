@@ -2,8 +2,8 @@
 # encoding: utf-8
 
 schema:
-  schema_id: cangjie5_express
-  name: 倉頡五代·快打模式
+  schema_id: cangjie
+  name: 倉頡
   version: "2018.04.14"
   author:
     - 發明人 朱邦復先生
@@ -11,17 +11,8 @@ schema:
     第五代倉頡輸入法
     碼表源自倉頡之友發佈的《五倉世紀版》
     www.chinesecj.com
-    快打模式：
-      - 取消連打
-      - 無重碼自動上屏，有重碼頂字上屏
-      - 取消 , . 翻頁
-      - 取消拼音混打
     修改：
-      - 刪除西文
-      - 刪除繁簡轉換
-      - 刪除全角ascii符號
-  dependencies:
-    - luna_quanpin
+      - 取消各種不合理的自動行為
 
 switches:
   - name: full_shape
@@ -44,7 +35,6 @@ engine:
     - matcher
     - abc_segmentor
     - punct_segmentor
-    - fallback_segmentor
   translators:
     - punct_translator
     - table_translator
@@ -55,13 +45,20 @@ engine:
 speller:
   alphabet: zyxwvutsrqponmlkjihgfedcba
   delimiter: " "
-  auto_select: true
-  #max_code_length: 5  # 僅五碼自動上屏
+  auto_select: false
+
+ascii_composer:
+  import_preset: default
+  switch_key:
+    Caps_Lock: noop
+    Shift_L: noop
+    Shift_R: noop
 
 translator:
   dictionary: cangjie
-  prism: cangjie5_express
-  enable_charset_filter: true
+  prism: cangjie
+  enable_charset_filter: false
+  enable_encoder: false
   enable_sentence: false
   preedit_format:
     - "xlit|abcdefghijklmnopqrstuvwxyz|日月金木水火土竹戈十大中一弓人心手口尸廿山女田難卜符|"
